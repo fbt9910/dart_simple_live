@@ -17,8 +17,27 @@ jobs:
     steps:
       # 签出代码
       - uses: actions/checkout@v4
-        with:
+                with:
           ref: dev
+          fetch-depth: 0   # 保留完整历史，避免 git 命令报错
+
+      # 设置 Git 用户信息
+      - name: Setup git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 确保当前目录是 git 仓库
+      - name: Ensure git repo
+        run: |
+          if [ ! -d ".git" ]; then
+            echo "No .git directory found, initializing..."
+            git init
+            git remote add origin https://github.com/${{ github.repository }}.git
+            git fetch --all
+            git checkout ${{ github.ref_name }}
+          fi
+
 
       # APK签名设置
       - name: Download Android keystore
@@ -160,8 +179,27 @@ jobs:
     steps:
       # 签出代码
       - uses: actions/checkout@v4
-        with:
+                with:
           ref: dev
+          fetch-depth: 0   # 保留完整历史，避免 git 命令报错
+
+      # 设置 Git 用户信息
+      - name: Setup git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 确保当前目录是 git 仓库
+      - name: Ensure git repo
+        run: |
+          if [ ! -d ".git" ]; then
+            echo "No .git directory found, initializing..."
+            git init
+            git remote add origin https://github.com/${{ github.repository }}.git
+            git fetch --all
+            git checkout ${{ github.ref_name }}
+          fi
+
       # 设置Flutter环境
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -209,8 +247,27 @@ jobs:
     steps:
       # 签出代码
       - uses: actions/checkout@v4
-        with:
+                with:
           ref: dev
+          fetch-depth: 0   # 保留完整历史，避免 git 命令报错
+
+      # 设置 Git 用户信息
+      - name: Setup git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 确保当前目录是 git 仓库
+      - name: Ensure git repo
+        run: |
+          if [ ! -d ".git" ]; then
+            echo "No .git directory found, initializing..."
+            git init
+            git remote add origin https://github.com/${{ github.repository }}.git
+            git fetch --all
+            git checkout ${{ github.ref_name }}
+          fi
+
       # 设置Flutter环境
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
